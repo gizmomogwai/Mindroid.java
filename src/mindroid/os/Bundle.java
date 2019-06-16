@@ -238,10 +238,11 @@ public final class Bundle {
      * @param key a String, or null
      * @param value an object, or null
      */
-    public void putObject(String key, Object value) {
+    public Bundle putObject(String key, Object value) {
         if (value != null) {
             mMap.put(key, value);
         }
+        return this;
     }
 
     /**

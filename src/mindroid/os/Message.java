@@ -335,8 +335,9 @@ public final class Message {
      * @see #getData()
      * @see #peekData()
      */
-    public void setData(Bundle data) {
+    public Message setData(Bundle data) {
         this.data = data;
+        return this;
     }
 
     /**
@@ -362,6 +363,10 @@ public final class Message {
     public Message() {
     }
 
+    public Message setWhat(int what) {
+        this.what = what;
+        return this;
+    }
     /**
      * Optional result. The semantics of exactly how this is used are up to the sender and receiver.
      *
