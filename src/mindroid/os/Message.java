@@ -380,4 +380,9 @@ public final class Message {
      * @hide
      */
     public int sendingPid = -1;
+
+    public Message setObject(Object obj) {
+        this.obj = obj;
+        return this;
+    }
 }
