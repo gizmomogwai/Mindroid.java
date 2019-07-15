@@ -23,6 +23,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UTFDataFormatException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Wraps an existing {@link OutputStream} and writes big-endian typed data to it.
@@ -183,7 +184,7 @@ public class DataOutputStream extends OutputStream implements DataOutput {
     }
 
     public final void writeChars(String string) throws IOException {
-        byte[] data = string.getBytes("UTF-16BE");
+        byte[] data = string.getBytes(StandardCharsets.UTF_16BE);
         mOutputStream.write(data);
     }
 

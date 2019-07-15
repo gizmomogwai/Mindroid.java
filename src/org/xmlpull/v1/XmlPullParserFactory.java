@@ -101,7 +101,7 @@ public class XmlPullParserFactory {
 
     public boolean getFeature (String name) {
         Boolean value = (Boolean) features.get(name);
-        return value != null ? value.booleanValue() : false;
+        return value != null && value.booleanValue();
     }
 
     /**
@@ -173,7 +173,7 @@ public class XmlPullParserFactory {
         if (parserClasses.size() == 0) throw new XmlPullParserException
                 ("No valid parser classes found in "+classNamesLocation);
 
-        String issues = new String();
+        String issues = "";
 
         for (int i = 0; i < parserClasses.size(); i++) {
             final Class ppClass = (Class) parserClasses.get(i);
@@ -219,7 +219,7 @@ public class XmlPullParserFactory {
                 ("No valid serializer classes found in "+classNamesLocation);
         }
 
-        String issues = new String();
+        String issues = "";
 
         for (int i = 0; i < serializerClasses.size (); i++) {
             final Class ppClass = (Class) serializerClasses.get(i);

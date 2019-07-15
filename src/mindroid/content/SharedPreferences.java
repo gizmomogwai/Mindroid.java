@@ -46,7 +46,7 @@ public interface SharedPreferences {
     /**
      * Interface definition for a callback to be invoked when a shared preference is changed.
      */
-    public abstract class OnSharedPreferenceChangeListener {
+    abstract class OnSharedPreferenceChangeListener {
         /**
          * Called when a shared preference is changed, added, or removed. This may be called even if
          * a preference is set to its existing value.
@@ -77,7 +77,7 @@ public interface SharedPreferences {
      * make in an editor are batched, and not copied back to the original {@link SharedPreferences}
      * until you call {@link #commit} or {@link #apply}
      */
-    public interface Editor {
+    interface Editor {
         /**
          * Set a String value in the preferences editor, to be written back once {@link #commit} or
          * {@link #apply} are called.

@@ -104,7 +104,7 @@ public class FileHandler extends Handler {
         mFiles = new File[mCount];
     }
 
-    private void initOutputFiles() throws FileNotFoundException, IOException {
+    private void initOutputFiles() throws IOException {
         for (int generation = 0; generation < mCount; generation++) {
             mFiles[generation] = new File(parseFileName(generation));
         }
@@ -156,10 +156,10 @@ public class FileHandler extends Handler {
         boolean hasGeneration = false;
 
         String tempPath = System.getProperty("java.io.tmpdir");
-        boolean tempPathHasSeparatorEnd = (tempPath == null ? false : tempPath.endsWith(File.separator));
+        boolean tempPathHasSeparatorEnd = (tempPath != null && tempPath.endsWith(File.separator));
 
         String homePath = System.getProperty("user.home");
-        boolean homePathHasSeparatorEnd = (homePath == null ? false : homePath.endsWith(File.separator));
+        boolean homePathHasSeparatorEnd = (homePath != null && homePath.endsWith(File.separator));
 
         StringBuilder sb = new StringBuilder();
         mPattern = mPattern.replace('/', File.separatorChar);

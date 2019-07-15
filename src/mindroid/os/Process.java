@@ -209,7 +209,7 @@ public class Process {
                         }
                     }
                     urls.add(new File(serviceInfo.applicationInfo.fileName).toURI().toURL());
-                    URLClassLoader classLoader = new URLClassLoader((URL[]) urls.toArray(new URL[urls.size()]), getClass().getClassLoader());
+                    URLClassLoader classLoader = new URLClassLoader(urls.toArray(new URL[urls.size()]), getClass().getClassLoader());
                     try {
                         Class<?> clazz = Class.forName(componentName, true, classLoader);
                         service = (Service) clazz.newInstance();

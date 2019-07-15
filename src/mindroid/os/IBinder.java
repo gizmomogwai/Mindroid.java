@@ -34,29 +34,29 @@ public interface IBinder {
      * immediately, without waiting for a result from the callee. Applies only if the caller and
      * callee are in different processes.
      */
-    public static final int FLAG_ONEWAY = 0x00000001;
+    int FLAG_ONEWAY = 0x00000001;
 
     /**
      * Returns the binder's id.
      */
-    public long getId();
+    long getId();
 
     /**
      * Returns the binder's URI.
      */
-    public URI getUri();
+    URI getUri();
 
     /**
      * Get the canonical name of the interface supported by this binder.
      */
-    public String getInterfaceDescriptor();
+    String getInterfaceDescriptor();
 
     /**
      * Attempt to retrieve a local implementation of an interface for this Binder object. If null is
      * returned, you will need to instantiate a proxy class to marshall calls through the transact()
      * method.
      */
-    public IInterface queryLocalInterface(String descriptor);
+    IInterface queryLocalInterface(String descriptor);
 
     /**
      * Perform a generic operation with the object.
@@ -66,7 +66,7 @@ public interface IBinder {
      * @param flags Additional operation flags. Either 0 for a normal RPC, or {@link #FLAG_ONEWAY}
      * for a one-way RPC.
      */
-    public Promise<Parcel> transact(int what, Parcel data, int flags) throws RemoteException;
+    Promise<Parcel> transact(int what, Parcel data, int flags) throws RemoteException;
 
     /**
      * Perform a lightweight operation with the object.
@@ -78,7 +78,7 @@ public interface IBinder {
      * @param flags Additional operation flags. Either 0 for a normal RPC, or {@link #FLAG_ONEWAY}
      * for a one-way RPC.
      */
-    public void transact(int what, int num, Object obj, Bundle data, Promise<?> promise, int flags) throws RemoteException;
+    void transact(int what, int num, Object obj, Bundle data, Promise<?> promise, int flags) throws RemoteException;
 
     /**
      * Interface for receiving a callback when the process hosting an IBinder

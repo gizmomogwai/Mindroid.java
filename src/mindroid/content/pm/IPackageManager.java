@@ -26,7 +26,7 @@ import mindroid.os.RemoteException;
 import mindroid.util.concurrent.Promise;
 
 public interface IPackageManager extends IInterface {
-    public static abstract class Stub extends Binder implements IPackageManager {
+    abstract class Stub extends Binder implements IPackageManager {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/content/pm/IPackageManager";
 
         public Stub() {
@@ -163,7 +163,7 @@ public interface IPackageManager extends IInterface {
         static final int MSG_GET_PERMISSIONS = 6;
     }
 
-    static class Proxy implements IPackageManager {
+    class Proxy implements IPackageManager {
         private final IBinder mBinder;
         private final Stub mStub;
         private final IPackageManager mProxy;
@@ -256,10 +256,10 @@ public interface IPackageManager extends IInterface {
         }
     }
 
-    public List<PackageInfo> getInstalledPackages(int flags) throws RemoteException;
-    public PackageInfo getPackageInfo(String packageName, int flags) throws RemoteException;
-    public PackageInfo getPackageArchiveInfo(String archiveFilePath, int flags) throws RemoteException;
-    public ResolveInfo resolveService(Intent intent, int flags) throws RemoteException;
-    public int checkPermission(String permissionName, int pid) throws RemoteException;
-    public String[] getPermissions(int pid) throws RemoteException;
+    List<PackageInfo> getInstalledPackages(int flags) throws RemoteException;
+    PackageInfo getPackageInfo(String packageName, int flags) throws RemoteException;
+    PackageInfo getPackageArchiveInfo(String archiveFilePath, int flags) throws RemoteException;
+    ResolveInfo resolveService(Intent intent, int flags) throws RemoteException;
+    int checkPermission(String permissionName, int pid) throws RemoteException;
+    String[] getPermissions(int pid) throws RemoteException;
 }

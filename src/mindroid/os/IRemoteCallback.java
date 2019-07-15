@@ -19,7 +19,7 @@ package mindroid.os;
 import mindroid.util.concurrent.Promise;
 
 public interface IRemoteCallback extends IInterface {
-    public static abstract class Stub extends Binder implements IRemoteCallback {
+    abstract class Stub extends Binder implements IRemoteCallback {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/os/IRemoteCallback";
 
         public Stub() {
@@ -88,7 +88,7 @@ public interface IRemoteCallback extends IInterface {
         static final int MSG_SEND_RESULT = 1;
     }
 
-    static class Proxy implements IRemoteCallback {
+    class Proxy implements IRemoteCallback {
         private final IBinder mBinder;
         private final Stub mStub;
         private final IRemoteCallback mProxy;
@@ -136,5 +136,5 @@ public interface IRemoteCallback extends IInterface {
         }
     }
 
-    public void sendResult(Bundle data) throws RemoteException;
+    void sendResult(Bundle data) throws RemoteException;
 }

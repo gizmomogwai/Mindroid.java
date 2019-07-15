@@ -25,7 +25,7 @@ import mindroid.os.RemoteException;
 import mindroid.util.concurrent.Promise;
 
 public interface IPackageInstaller extends IInterface {
-    public static abstract class Stub extends Binder implements IPackageInstaller {
+    abstract class Stub extends Binder implements IPackageInstaller {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/content/pm/IPackageInstaller";
 
         public Stub() {
@@ -50,7 +50,7 @@ public interface IPackageInstaller extends IInterface {
             case MSG_INSTALL: {
                 String file = data.getString("file");
                 install(new File(file));
-                ((Promise<Void>) result).complete(null);
+                result.complete(null);
                 break;
             }
             case MSG_UNINSTALL: {
@@ -111,7 +111,7 @@ public interface IPackageInstaller extends IInterface {
         static final int MSG_UNINSTALL = 2;
     }
 
-    static class Proxy implements IPackageInstaller {
+    class Proxy implements IPackageInstaller {
         private final IBinder mBinder;
         private final Stub mStub;
         private final IPackageInstaller mProxy;
@@ -168,6 +168,6 @@ public interface IPackageInstaller extends IInterface {
         }
     }
 
-    public void install(File file) throws RemoteException;
-    public void uninstall(String packageName) throws RemoteException;
+    void install(File file) throws RemoteException;
+    void uninstall(String packageName) throws RemoteException;
 }

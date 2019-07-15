@@ -34,8 +34,8 @@ public class ServerSocket {
     public static final int OP_CLOSE = 1;
     public static final int OP_ACCEPT = 2;
 
-    public static interface Listener {
-        public abstract void onOperation(int operation, Object arg);
+    public interface Listener {
+        void onOperation(int operation, Object arg);
     }
 
     public ServerSocket(SocketAddress socketAddress) throws IOException {

@@ -21,7 +21,7 @@ import mindroid.content.ServiceConnection;
 import mindroid.util.concurrent.Promise;
 
 public interface IProcess extends IInterface {
-    public static abstract class Stub extends Binder implements IProcess {
+    abstract class Stub extends Binder implements IProcess {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/os/IProcess";
 
         public Stub(Looper looper) {
@@ -186,7 +186,7 @@ public interface IProcess extends IInterface {
         static final int MSG_UNBIND_SERVICE = 5;
     }
 
-    static class Proxy implements IProcess {
+    class Proxy implements IProcess {
         private final IBinder mBinder;
         private final Stub mStub;
         private final IProcess mProxy;
@@ -288,11 +288,11 @@ public interface IProcess extends IInterface {
         }
     }
 
-    public void createService(Intent intent, IRemoteCallback callback) throws RemoteException;
-    public void startService(Intent intent, int flags, int startId, IRemoteCallback callback) throws RemoteException;
-    public void stopService(Intent intent) throws RemoteException;
-    public void stopService(Intent intent, IRemoteCallback callback) throws RemoteException;
-    public void bindService(Intent intent, ServiceConnection conn, int flags, IRemoteCallback callback) throws RemoteException;
-    public void unbindService(Intent intent) throws RemoteException;
-    public void unbindService(Intent intent, IRemoteCallback callback) throws RemoteException;
+    void createService(Intent intent, IRemoteCallback callback) throws RemoteException;
+    void startService(Intent intent, int flags, int startId, IRemoteCallback callback) throws RemoteException;
+    void stopService(Intent intent) throws RemoteException;
+    void stopService(Intent intent, IRemoteCallback callback) throws RemoteException;
+    void bindService(Intent intent, ServiceConnection conn, int flags, IRemoteCallback callback) throws RemoteException;
+    void unbindService(Intent intent) throws RemoteException;
+    void unbindService(Intent intent, IRemoteCallback callback) throws RemoteException;
 }

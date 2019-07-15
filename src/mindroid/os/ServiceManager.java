@@ -83,13 +83,13 @@ public final class ServiceManager {
                 mProcesses.put(name, new Pair(process, p));
                 return p;
             } else {
-                Pair pair = (Pair) mProcesses.get(name);
+                Pair pair = mProcesses.get(name);
                 return (IProcess) pair.second;
             }
         }
 
         public synchronized boolean stopProcess(String name) {
-            Pair pair = (Pair) mProcesses.remove(name);
+            Pair pair = mProcesses.remove(name);
             if (pair != null) {
                 final Process process = (Process) pair.first;
                 mHandler.post(new Runnable() {
@@ -105,7 +105,7 @@ public final class ServiceManager {
 
         public synchronized Future<Boolean> stopProcess(String name, final long timeout) {
             final Promise<Boolean> promise = new Promise<>();
-            Pair pair = (Pair) mProcesses.remove(name);
+            Pair pair = mProcesses.remove(name);
             if (pair != null) {
                 final Process process = (Process) pair.first;
                 mHandler.post(new Runnable() {
@@ -201,7 +201,7 @@ public final class ServiceManager {
     }
 
     public void shutdown() {
-        ProcessRecord processRecords[];
+        ProcessRecord[] processRecords;
         synchronized (mProcesses) {
             Collection<ProcessRecord> prs = mProcesses.values();
             processRecords = new ProcessRecord[prs.size()];

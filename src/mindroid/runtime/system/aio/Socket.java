@@ -44,8 +44,8 @@ public class Socket {
     public static final int OP_READ = 2;
     public static final int OP_WRITE = 4;
 
-    public static interface Listener {
-        public abstract void onOperation(int operation, Object arg);
+    public interface Listener {
+        void onOperation(int operation, Object arg);
     }
 
     public Socket() throws IOException {

@@ -40,7 +40,7 @@ public interface Future<T> {
      *
      * @return {@code true} if completed
      */
-    public boolean isDone();
+    boolean isDone();
 
     /**
      * Waits if necessary for this Future to complete, and then
@@ -52,7 +52,7 @@ public interface Future<T> {
      * @throws InterruptedException if the current thread was interrupted
      * while waiting
      */
-    public T get() throws CancellationException, ExecutionException, InterruptedException;
+    T get() throws CancellationException, ExecutionException, InterruptedException;
 
     /**
      * Waits if necessary for at most the given time for this Future
@@ -66,7 +66,7 @@ public interface Future<T> {
      * while waiting
      * @throws TimeoutException if the wait timed out
      */
-    public T get(long timeout) throws CancellationException, ExecutionException, TimeoutException, InterruptedException;
+    T get(long timeout) throws CancellationException, ExecutionException, TimeoutException, InterruptedException;
 
     /**
      * If not already completed, completes this Future with
@@ -77,7 +77,7 @@ public interface Future<T> {
      *
      * @return {@code true} if this task is now cancelled
      */
-    public boolean cancel();
+    boolean cancel();
 
     /**
      * Returns {@code true} if this Future was cancelled
@@ -86,7 +86,7 @@ public interface Future<T> {
      * @return {@code true} if this Future was cancelled
      * before it completed normally
      */
-    public boolean isCancelled();
+    boolean isCancelled();
 
     /**
      * Returns {@code true} if this Future completed
@@ -98,7 +98,7 @@ public interface Future<T> {
      * @return {@code true} if this Future completed
      * exceptionally
      */
-    public boolean isCompletedExceptionally();
+    boolean isCompletedExceptionally();
 
     /**
      * Returns a new Future that, when this Future completes
@@ -114,12 +114,12 @@ public interface Future<T> {
      * @param <U> the function's return type
      * @return the new Future
      */
-    public <U> Future<U> thenApply(Function<? super T, ? extends U> function);
+    <U> Future<U> thenApply(Function<? super T, ? extends U> function);
 
     /**
      * @see #thenApply(Function)
      */
-    public <U> Future<U> then(Function<? super T, ? extends U> function);
+    <U> Future<U> then(Function<? super T, ? extends U> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -135,12 +135,12 @@ public interface Future<T> {
      * @param <U> the function's return type
      * @return the new Future
      */
-    public <U> Future<U> thenApply(Handler handler, Function<? super T, ? extends U> function);
+    <U> Future<U> thenApply(Handler handler, Function<? super T, ? extends U> function);
 
     /**
      * @see #thenApply(Handler, Function)
      */
-    public <U> Future<U> then(Handler handler, Function<? super T, ? extends U> function);
+    <U> Future<U> then(Handler handler, Function<? super T, ? extends U> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -156,12 +156,12 @@ public interface Future<T> {
      * @param <U> the function's return type
      * @return the new Future
      */
-    public <U> Future<U> thenApply(Executor executor, Function<? super T, ? extends U> function);
+    <U> Future<U> thenApply(Executor executor, Function<? super T, ? extends U> function);
 
     /**
      * @see #thenApply(Executor, Function)
      */
-    public <U> Future<U> then(Executor executor, Function<? super T, ? extends U> function);
+    <U> Future<U> then(Executor executor, Function<? super T, ? extends U> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -179,12 +179,12 @@ public interface Future<T> {
      * @param <U> the function's return type
      * @return the new Future
      */
-    public <U> Future<U> thenApply(BiFunction<? super T, Throwable, ? extends U> function);
+    <U> Future<U> thenApply(BiFunction<? super T, Throwable, ? extends U> function);
 
     /**
      * @see #thenApply(BiFunction)
      */
-    public <U> Future<U> then(BiFunction<? super T, Throwable, ? extends U> function);
+    <U> Future<U> then(BiFunction<? super T, Throwable, ? extends U> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -203,12 +203,12 @@ public interface Future<T> {
      * @param <U> the function's return type
      * @return the new Future
      */
-    public <U> Future<U> thenApply(Handler handler, BiFunction<? super T, Throwable, ? extends U> function);
+    <U> Future<U> thenApply(Handler handler, BiFunction<? super T, Throwable, ? extends U> function);
 
     /**
      * @see #thenApply(Handler, BiFunction)
      */
-    public <U> Future<U> then(Handler handler, BiFunction<? super T, Throwable, ? extends U> function);
+    <U> Future<U> then(Handler handler, BiFunction<? super T, Throwable, ? extends U> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -227,12 +227,12 @@ public interface Future<T> {
      * @param <U> the function's return type
      * @return the new Future
      */
-    public <U> Future<U> thenApply(Executor executor, BiFunction<? super T, Throwable, ? extends U> function);
+    <U> Future<U> thenApply(Executor executor, BiFunction<? super T, Throwable, ? extends U> function);
 
     /**
      * @see #thenApply(Executor, BiFunction)
      */
-    public <U> Future<U> then(Executor executor, BiFunction<? super T, Throwable, ? extends U> function);
+    <U> Future<U> then(Executor executor, BiFunction<? super T, Throwable, ? extends U> function);
 
     /**
      * Returns a new Future that is completed with the same
@@ -256,7 +256,7 @@ public interface Future<T> {
      * @param <U> the type of the returned Future's result
      * @return the new Future
      */
-    public <U> Future<U> thenCompose(Function<? super T, ? extends Future<U>> function);
+    <U> Future<U> thenCompose(Function<? super T, ? extends Future<U>> function);
 
     /**
      * Returns a new Future that is completed with the same
@@ -280,7 +280,7 @@ public interface Future<T> {
      * @param <U> the type of the returned Future's result
      * @return the new Future
      */
-    public <U> Future<U> thenCompose(Handler handler, Function<? super T, ? extends Future<U>> function);
+    <U> Future<U> thenCompose(Handler handler, Function<? super T, ? extends Future<U>> function);
 
     /**
      * Returns a new Future that is completed with the same
@@ -304,7 +304,7 @@ public interface Future<T> {
      * @param <U> the type of the returned Future's result
      * @return the new Future
      */
-    public <U> Future<U> thenCompose(Executor executor, Function<? super T, ? extends Future<U>> function);
+    <U> Future<U> thenCompose(Executor executor, Function<? super T, ? extends Future<U>> function);
 
     /**
      * Returns a new Future that is completed with the same
@@ -329,7 +329,7 @@ public interface Future<T> {
      * @param <U> the type of the returned Future's result
      * @return the new Future
      */
-    public <U> Future<U> thenCompose(BiFunction<? super T, Throwable, ? extends Future<U>> function);
+    <U> Future<U> thenCompose(BiFunction<? super T, Throwable, ? extends Future<U>> function);
 
     /**
      * Returns a new Future that is completed with the same
@@ -354,7 +354,7 @@ public interface Future<T> {
      * @param <U> the type of the returned Future's result
      * @return the new Future
      */
-    public <U> Future<U> thenCompose(Handler handler, BiFunction<? super T, Throwable, ? extends Future<U>> function);
+    <U> Future<U> thenCompose(Handler handler, BiFunction<? super T, Throwable, ? extends Future<U>> function);
 
     /**
      * Returns a new Future that is completed with the same
@@ -379,7 +379,7 @@ public interface Future<T> {
      * @param <U> the type of the returned Future's result
      * @return the new Future
      */
-    public <U> Future<U> thenCompose(Executor executor, BiFunction<? super T, Throwable, ? extends Future<U>> function);
+    <U> Future<U> thenCompose(Executor executor, BiFunction<? super T, Throwable, ? extends Future<U>> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -394,12 +394,12 @@ public interface Future<T> {
      * returned Future
      * @return the new Future
      */
-    public Future<T> thenAccept(Consumer<? super T> action);
+    Future<T> thenAccept(Consumer<? super T> action);
 
     /**
      * @see #thenAccept(Consumer)
      */
-    public Future<T> then(Consumer<? super T> action);
+    Future<T> then(Consumer<? super T> action);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -414,12 +414,12 @@ public interface Future<T> {
      * returned Future
      * @return the new Future
      */
-    public Future<T> thenAccept(Handler handler, Consumer<? super T> action);
+    Future<T> thenAccept(Handler handler, Consumer<? super T> action);
 
     /**
      * @see #thenAccept(Handler, Consumer)
      */
-    public Future<T> then(Handler handler, Consumer<? super T> action);
+    Future<T> then(Handler handler, Consumer<? super T> action);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -434,12 +434,12 @@ public interface Future<T> {
      * returned Future
      * @return the new Future
      */
-    public Future<T> thenAccept(Executor executor, Consumer<? super T> action);
+    Future<T> thenAccept(Executor executor, Consumer<? super T> action);
 
     /**
      * @see #thenAccept(Executor, Consumer)
      */
-    public Future<T> then(Executor executor, Consumer<? super T> action);
+    Future<T> then(Executor executor, Consumer<? super T> action);
 
     /**
      * Returns a new Future with the same result or exception as
@@ -454,12 +454,12 @@ public interface Future<T> {
      * @param action the action to perform
      * @return the new Future
      */
-    public Future<T> thenAccept(BiConsumer<? super T, ? super Throwable> action);
+    Future<T> thenAccept(BiConsumer<? super T, ? super Throwable> action);
 
     /**
      * @see #thenAccept(BiConsumer)
      */
-    public Future<T> then(BiConsumer<? super T, ? super Throwable> action);
+    Future<T> then(BiConsumer<? super T, ? super Throwable> action);
 
     /**
      * Returns a new Future with the same result or exception as
@@ -475,12 +475,12 @@ public interface Future<T> {
      * @param action the action to perform
      * @return the new Future
      */
-    public Future<T> thenAccept(Handler handler, BiConsumer<? super T, ? super Throwable> action);
+    Future<T> thenAccept(Handler handler, BiConsumer<? super T, ? super Throwable> action);
 
     /**
      * @see #thenAccept(Handler, BiConsumer)
      */
-    public Future<T> then(Handler handler, BiConsumer<? super T, ? super Throwable> action);
+    Future<T> then(Handler handler, BiConsumer<? super T, ? super Throwable> action);
 
     /**
      * Returns a new Future with the same result or exception as
@@ -496,12 +496,12 @@ public interface Future<T> {
      * @param action the action to perform
      * @return the new Future
      */
-    public Future<T> thenAccept(Executor executor, BiConsumer<? super T, ? super Throwable> action);
+    Future<T> thenAccept(Executor executor, BiConsumer<? super T, ? super Throwable> action);
 
     /**
      * @see #thenAccept(Executor, BiConsumer)
      */
-    public Future<T> then(Executor executor, BiConsumer<? super T, ? super Throwable> action);
+    Future<T> then(Executor executor, BiConsumer<? super T, ? super Throwable> action);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -515,12 +515,12 @@ public interface Future<T> {
      * returned Future
      * @return the new Future
      */
-    public Future<T> thenRun(Runnable action);
+    Future<T> thenRun(Runnable action);
 
     /**
      * @see #thenRun(Runnable)
      */
-    public Future<T> then(Runnable action);
+    Future<T> then(Runnable action);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -534,12 +534,12 @@ public interface Future<T> {
      * returned Future
      * @return the new Future
      */
-    public Future<T> thenRun(Handler handler, Runnable action);
+    Future<T> thenRun(Handler handler, Runnable action);
 
     /**
      * @see #thenRun(Handler, Runnable)
      */
-    public Future<T> then(Handler handler, Runnable action);
+    Future<T> then(Handler handler, Runnable action);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -553,12 +553,12 @@ public interface Future<T> {
      * returned Future
      * @return the new Future
      */
-    public Future<T> thenRun(Executor executor, Runnable action);
+    Future<T> thenRun(Executor executor, Runnable action);
 
     /**
      * @see #thenRun(Executor, Runnable)
      */
-    public Future<T> then(Executor executor, Runnable action);
+    Future<T> then(Executor executor, Runnable action);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -573,7 +573,7 @@ public interface Future<T> {
      * exceptionally
      * @return the new Future
      */
-    public Future<T> catchException(Function<Throwable, ? extends T> function);
+    Future<T> catchException(Function<Throwable, ? extends T> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -588,7 +588,7 @@ public interface Future<T> {
      * exceptionally
      * @return the new Future
      */
-    public Future<T> catchException(Handler handler, Function<Throwable, ? extends T> function);
+    Future<T> catchException(Handler handler, Function<Throwable, ? extends T> function);
 
     /**
      * Returns a new Future that, when this Future completes
@@ -603,13 +603,13 @@ public interface Future<T> {
      * exceptionally
      * @return the new Future
      */
-    public Future<T> catchException(Executor executor, Function<Throwable, ? extends T> function);
+    Future<T> catchException(Executor executor, Function<Throwable, ? extends T> function);
 
-    public Future<T> catchException(Consumer<Throwable> action);
+    Future<T> catchException(Consumer<Throwable> action);
 
-    public Future<T> catchException(Handler handler, Consumer<Throwable> action);
+    Future<T> catchException(Handler handler, Consumer<Throwable> action);
 
-    public Future<T> catchException(Executor executor, Consumer<Throwable> action);
+    Future<T> catchException(Executor executor, Consumer<Throwable> action);
 
     /**
      * Exceptionally completes this Future with a {@link TimeoutException}
@@ -619,7 +619,7 @@ public interface Future<T> {
      *        with a TimeoutException in milliseconds
      * @return this Future
      */
-    public Future<T> orTimeout(long timeout);
+    Future<T> orTimeout(long timeout);
 
     /**
      * Completes this Future with the given value if not otherwise
@@ -630,9 +630,9 @@ public interface Future<T> {
      *        with the given value in milliseconds
      * @return this Future
      */
-    public Future<T> completeOnTimeout(T value, long timeout);
+    Future<T> completeOnTimeout(T value, long timeout);
 
-    public Future<T> delay(long delay);
+    Future<T> delay(long delay);
 
     /**
      * Returns a {@link Promise} maintaining the same
@@ -644,5 +644,5 @@ public interface Future<T> {
      *
      * @return the Promise
      */
-    public Promise<T> toPromise();
+    Promise<T> toPromise();
 }

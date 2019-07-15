@@ -36,4 +36,4 @@ public class CompletionException extends RuntimeException {
     public CompletionException(Throwable cause) {
         super(cause);
     }
-};
+}

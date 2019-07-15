@@ -25,7 +25,7 @@ import mindroid.os.RemoteException;
 import mindroid.util.concurrent.Promise;
 
 public interface IConsole extends IInterface {
-    public static abstract class Stub extends Binder implements IConsole {
+    abstract class Stub extends Binder implements IConsole {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/runtime/inspection/IConsole";
 
         public Stub() {
@@ -135,7 +135,7 @@ public interface IConsole extends IInterface {
         static final int MSG_LIST_COMMANDS = 4;
     }
 
-    static class Proxy implements IConsole {
+    class Proxy implements IConsole {
         private final IBinder mBinder;
         private final Stub mStub;
         private final IConsole mProxy;
@@ -203,8 +203,8 @@ public interface IConsole extends IInterface {
         }
     }
 
-    public boolean addCommand(String command, String description, ICommandHandler commandHandler) throws RemoteException;
-    public boolean removeCommand(String command) throws RemoteException;
-    public Promise<String> executeCommand(String command, String[] arguments) throws RemoteException;
-    public Map<String, String> listCommands() throws RemoteException;
+    boolean addCommand(String command, String description, ICommandHandler commandHandler) throws RemoteException;
+    boolean removeCommand(String command) throws RemoteException;
+    Promise<String> executeCommand(String command, String[] arguments) throws RemoteException;
+    Map<String, String> listCommands() throws RemoteException;
 }

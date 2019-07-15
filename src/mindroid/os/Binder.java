@@ -120,7 +120,7 @@ public class Binder implements IBinder {
             }
             int nodeId = (int) ((mId >> 32) & 0xFFFFFFFFL);
             int id = (int) (mId & 0xFFFFFFFFL);
-            mUri = new URI(uri.getScheme(), String.valueOf(nodeId) + "." + String.valueOf(id), null, null, null);
+            mUri = new URI(uri.getScheme(), nodeId + "." + id, null, null, null);
             mRuntime.attachBinder(mUri, this);
         } catch (URISyntaxException e) {
             Log.e(LOG_TAG, "Failed to attach interface to runtime system", e);
@@ -310,8 +310,8 @@ public class Binder implements IBinder {
     }
 
     private interface IMessenger {
-        public boolean isCurrentThread();
-        public boolean send(final Message message);
+        boolean isCurrentThread();
+        boolean send(final Message message);
     }
 
     private class Messenger implements IMessenger {
@@ -543,6 +543,6 @@ public class Binder implements IBinder {
     /** @hide */
     public void setId(long id) {
         mId = id;
-        mUri = URI.create(mUri.getScheme() + "://" + String.valueOf((int) ((mId >> 32) & 0xFFFFFFFFL)) + "." + String.valueOf((int) (mId & 0xFFFFFFFFL)));
+        mUri = URI.create(mUri.getScheme() + "://" + (int) ((mId >> 32) & 0xFFFFFFFFL) + "." + (int) (mId & 0xFFFFFFFFL));
     }
 }

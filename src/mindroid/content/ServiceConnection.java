@@ -36,7 +36,7 @@ public interface ServiceConnection {
      * @param service The IBinder of the Service's communication channel, which you can now make
      * calls on.
      */
-    public void onServiceConnected(ComponentName name, IBinder service);
+    void onServiceConnected(ComponentName name, IBinder service);
 
     /**
      * Called when a connection to the Service has been lost. This typically happens when the
@@ -46,5 +46,5 @@ public interface ServiceConnection {
      * 
      * @param name The concrete component name of the service whose connection has been lost.
      */
-    public void onServiceDisconnected(ComponentName name);
+    void onServiceDisconnected(ComponentName name);
 }

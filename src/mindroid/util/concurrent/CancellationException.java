@@ -37,4 +37,4 @@ public class CancellationException extends IllegalStateException {
     public CancellationException(Throwable cause) {
         super(cause);
     }
-};
+}

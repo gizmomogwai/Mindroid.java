@@ -81,7 +81,7 @@ public class ServiceDiscovery {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
             XmlPullParser parser = factory.newPullParser();
-            parser.setInput((InputStream) inputStream, "UTF-8");
+            parser.setInput(inputStream, "UTF-8");
             parser.require(XmlPullParser.START_DOCUMENT, null, null);
             parser.nextTag();
             parser.require(XmlPullParser.START_TAG, null, ROOT_TAG);

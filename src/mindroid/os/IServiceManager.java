@@ -25,7 +25,7 @@ import mindroid.os.IInterface;
 import mindroid.util.concurrent.Promise;
 
 public interface IServiceManager extends IInterface {
-    public static abstract class Stub extends Binder implements IServiceManager {
+    abstract class Stub extends Binder implements IServiceManager {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/os/IServiceManager";
 
         public Stub(Looper looper) {
@@ -187,11 +187,11 @@ public interface IServiceManager extends IInterface {
         static final int MSG_STOP_SYSTEM_SERVICE = 6;
     }
 
-    public Promise<ComponentName> startService(Intent intent) throws RemoteException;
-    public Promise<Boolean> stopService(Intent intent) throws RemoteException;
-    public Promise<Boolean> bindService(Intent intent, ServiceConnection conn, int flags, IRemoteCallback callback) throws RemoteException;
-    public void unbindService(Intent intent, ServiceConnection conn) throws RemoteException;
-    public void unbindService(Intent intent, ServiceConnection conn, IRemoteCallback callback) throws RemoteException;
-    public Promise<ComponentName> startSystemService(Intent intent) throws RemoteException;
-    public Promise<Boolean> stopSystemService(Intent intent) throws RemoteException;
+    Promise<ComponentName> startService(Intent intent) throws RemoteException;
+    Promise<Boolean> stopService(Intent intent) throws RemoteException;
+    Promise<Boolean> bindService(Intent intent, ServiceConnection conn, int flags, IRemoteCallback callback) throws RemoteException;
+    void unbindService(Intent intent, ServiceConnection conn) throws RemoteException;
+    void unbindService(Intent intent, ServiceConnection conn, IRemoteCallback callback) throws RemoteException;
+    Promise<ComponentName> startSystemService(Intent intent) throws RemoteException;
+    Promise<Boolean> stopSystemService(Intent intent) throws RemoteException;
 }

@@ -23,7 +23,7 @@ package mindroid.os;
 public final class RemoteCallback {
 
     public interface OnResultListener {
-        public void onResult(Bundle result);
+        void onResult(Bundle result);
     }
 
     private final OnResultListener mListener;

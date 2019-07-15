@@ -74,7 +74,7 @@ public class Handler {
      * own subclass of Handler.
      */
     public interface Callback {
-        public boolean handleMessage(Message msg);
+        boolean handleMessage(Message msg);
     }
 
     /**

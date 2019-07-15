@@ -24,7 +24,7 @@ import mindroid.os.RemoteException;
 import mindroid.util.concurrent.Promise;
 
 public interface IOnSharedPreferenceChangeListener extends IInterface {
-    public static abstract class Stub extends Binder implements IOnSharedPreferenceChangeListener {
+    abstract class Stub extends Binder implements IOnSharedPreferenceChangeListener {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/app/IOnSharedPreferenceChangeListener";
 
         public Stub() {
@@ -104,7 +104,7 @@ public interface IOnSharedPreferenceChangeListener extends IInterface {
         static final int MSG_ON_SHARED_PREFERENCE_CHANGED = 2;
     }
 
-    static class Proxy implements IOnSharedPreferenceChangeListener {
+    class Proxy implements IOnSharedPreferenceChangeListener {
         private final IBinder mBinder;
         private final Stub mStub;
         private final IOnSharedPreferenceChangeListener mProxy;
@@ -161,6 +161,6 @@ public interface IOnSharedPreferenceChangeListener extends IInterface {
         }
     }
 
-    public void onSharedPreferenceChanged(String key) throws RemoteException;
-    public void onSharedPreferenceChanged() throws RemoteException;
+    void onSharedPreferenceChanged(String key) throws RemoteException;
+    void onSharedPreferenceChanged() throws RemoteException;
 }

@@ -18,6 +18,7 @@ package mindroid.util.logging;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import mindroid.util.concurrent.Promise;
@@ -117,12 +118,8 @@ public class LogBuffer {
         }
         byte[] tagBuffer = null;
         byte[] messageBuffer = null;
-        try {
-            tagBuffer = tag.getBytes("UTF-8");
-            messageBuffer = message.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return false;
-        }
+        tagBuffer = tag.getBytes(StandardCharsets.UTF_8);
+        messageBuffer = message.getBytes(StandardCharsets.UTF_8);
         final int size = TIMESTAMP_SIZE + THREAD_ID_SIZE + PRIORITY_SIZE + TAG_SIZE + tagBuffer.length + MESSAGE_SIZE + messageBuffer.length;
         if ((size + 4) > mSize) {
             return false;

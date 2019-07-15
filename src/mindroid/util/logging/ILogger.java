@@ -24,7 +24,7 @@ import mindroid.os.RemoteException;
 import mindroid.util.concurrent.Promise;
 
 public interface ILogger extends IInterface {
-    public static abstract class Stub extends Binder implements ILogger {
+    abstract class Stub extends Binder implements ILogger {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/util/logging/ILogger";
 
         public Stub() {
@@ -54,12 +54,12 @@ public interface ILogger extends IInterface {
             }
             case MSG_MARK: {
                 mark();
-                ((Promise<Void>) result).complete(null);
+                result.complete(null);
                 break;
             }
             case MSG_RESET: {
                 reset();
-                ((Promise<Void>) result).complete(null);
+                result.complete(null);
                 break;
             }
             default:
@@ -120,7 +120,7 @@ public interface ILogger extends IInterface {
         static final int MSG_RESET = 3;
     }
 
-    static class Proxy implements ILogger {
+    class Proxy implements ILogger {
         private final IBinder mBinder;
         private final Stub mStub;
         private final ILogger mProxy;
@@ -180,7 +180,7 @@ public interface ILogger extends IInterface {
         }
     }
 
-    public Promise<String> assumeThat(String tag, String message, long timeout) throws RemoteException;
-    public void mark() throws RemoteException;
-    public void reset() throws RemoteException;
+    Promise<String> assumeThat(String tag, String message, long timeout) throws RemoteException;
+    void mark() throws RemoteException;
+    void reset() throws RemoteException;
 }

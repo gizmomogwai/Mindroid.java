@@ -374,9 +374,7 @@ public class Promise<T> implements Future<T> {
     public boolean isCancelled() {
         if (mResult instanceof Promise.Error) {
             Throwable throwable = ((Promise.Error) mResult).mThrowable;
-            if (throwable instanceof CancellationException) {
-                return true;
-            }
+            return throwable instanceof CancellationException;
         }
         return false;
     }

@@ -293,7 +293,7 @@ public class Mindroid extends Plugin {
                 outputStream.writeInt(this.size);
                 outputStream.write(this.data, 0, this.size);
                 if (type != MESSAGE_TYPE_TRANSACTION) {
-                    if (this.cause != null && !RemoteException.class.isInstance(this.cause)) {
+                    if (this.cause != null && !(this.cause instanceof RemoteException)) {
                         outputStream.writeInt(1);
                         outputStream.writeUTF(this.cause.getClass().getName());
                     } else {

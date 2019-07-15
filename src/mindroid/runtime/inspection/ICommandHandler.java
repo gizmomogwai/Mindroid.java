@@ -24,7 +24,7 @@ import mindroid.os.RemoteException;
 import mindroid.util.concurrent.Promise;
 
 public interface ICommandHandler extends IInterface {
-    public static abstract class Stub extends Binder implements ICommandHandler {
+    abstract class Stub extends Binder implements ICommandHandler {
         private static final String DESCRIPTOR = "mindroid://interfaces/mindroid/runtime/inspection/ICommandHandler";
 
         public Stub() {
@@ -93,7 +93,7 @@ public interface ICommandHandler extends IInterface {
         static final int MSG_EXECUTE = 1;
     }
 
-    static class Proxy implements ICommandHandler {
+    class Proxy implements ICommandHandler {
         private final IBinder mBinder;
         private final Stub mStub;
         private final ICommandHandler mProxy;
@@ -139,5 +139,5 @@ public interface ICommandHandler extends IInterface {
         }
     }
 
-    public Promise<String> execute(String[] arguments) throws RemoteException;
+    Promise<String> execute(String[] arguments) throws RemoteException;
 }

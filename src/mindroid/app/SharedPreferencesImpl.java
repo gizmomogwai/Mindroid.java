@@ -401,7 +401,7 @@ public final class SharedPreferencesImpl implements SharedPreferences {
 
     private void notifySharedPreferenceChangeListeners(final List<String> keys) {
         for (int i = 0; i < keys.size(); i++) {
-            String key = (String) keys.get(i);
+            String key = keys.get(i);
             Iterator<Map.Entry<OnSharedPreferenceChangeListener, IOnSharedPreferenceChangeListener>> itr = mListeners.entrySet().iterator();
             while (itr.hasNext()) {
                 Map.Entry<OnSharedPreferenceChangeListener, IOnSharedPreferenceChangeListener> entry = itr.next();
@@ -417,7 +417,7 @@ public final class SharedPreferencesImpl implements SharedPreferences {
         Iterator<Map.Entry<OnSharedPreferenceChangeListener, IOnSharedPreferenceChangeListener>> itr = mListeners.entrySet().iterator();
         while (itr.hasNext()) {
             Map.Entry<OnSharedPreferenceChangeListener, IOnSharedPreferenceChangeListener> entry = itr.next();
-            IOnSharedPreferenceChangeListener listener = (IOnSharedPreferenceChangeListener) entry.getValue();
+            IOnSharedPreferenceChangeListener listener = entry.getValue();
             try {
                 listener.onSharedPreferenceChanged();
             } catch (RemoteException e) {
@@ -691,7 +691,7 @@ public final class SharedPreferencesImpl implements SharedPreferences {
             Iterator<String> itr = ((Set<String>) value).iterator();
             while (itr.hasNext()) {
                 serializer.startTag(null, STRING_TAG);
-                serializer.text(itr.next().toString());
+                serializer.text(itr.next());
                 serializer.endTag(null, STRING_TAG);
             }
             serializer.endTag(null, STRING_SET_TAG);

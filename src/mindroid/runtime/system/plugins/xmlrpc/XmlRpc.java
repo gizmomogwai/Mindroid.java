@@ -333,7 +333,7 @@ public class XmlRpc extends Plugin {
                 int size = 4 + 2 + uri.length + 4 + 4 + 4 + this.size;
                 if (type != MESSAGE_TYPE_TRANSACTION) {
                     size += 4;
-                    if ((this.cause != null) && !RemoteException.class.isInstance(this.cause)) {
+                    if ((this.cause != null) && !(this.cause instanceof RemoteException)) {
                         size += this.cause.getClass().getName().getBytes(StandardCharsets.US_ASCII).length;
                     }
                 }
@@ -346,7 +346,7 @@ public class XmlRpc extends Plugin {
                 outputStream.writeInt(this.size);
                 outputStream.write(this.data, 0, this.size);
                 if (type != MESSAGE_TYPE_TRANSACTION) {
-                    if (this.cause != null && !RemoteException.class.isInstance(this.cause)) {
+                    if (this.cause != null && !(this.cause instanceof RemoteException)) {
                         outputStream.writeInt(1);
                         byte[] exceptionClassName = this.cause.getClass().getName().getBytes(StandardCharsets.US_ASCII);
                         outputStream.writeShort(exceptionClassName.length);

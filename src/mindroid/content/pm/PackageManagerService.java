@@ -188,7 +188,7 @@ public class PackageManagerService extends Service {
             if (process != null) {
                 Set<String> permissions = mPermissions.get(process);
                 if (permissions != null) {
-                    return (String[]) permissions.toArray(new String[permissions.size()]);
+                    return permissions.toArray(new String[permissions.size()]);
                 }
             }
             return new String[] {};
@@ -259,7 +259,7 @@ public class PackageManagerService extends Service {
         mPackages.put(packageInfo.packageName, packageInfo);
 
         for (int i = 0; i < packageInfo.services.length; i++) {
-            ServiceInfo si = (ServiceInfo) packageInfo.services[i];
+            ServiceInfo si = packageInfo.services[i];
             mComponents.put(new ComponentName(si.packageName, si.name), si);
         }
 
@@ -279,7 +279,7 @@ public class PackageManagerService extends Service {
             mPackages.remove(packageName);
 
             for (int i = 0; i < packageInfo.services.length; i++) {
-                ServiceInfo si = (ServiceInfo) packageInfo.services[i];
+                ServiceInfo si = packageInfo.services[i];
                 mComponents.remove(new ComponentName(si.packageName, si.name));
             }
 
@@ -327,7 +327,7 @@ public class PackageManagerService extends Service {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);
         XmlPullParser parser = factory.newPullParser();
-        parser.setInput((InputStream) input, UTF_8);
+        parser.setInput(input, UTF_8);
         parser.require(XmlPullParser.START_DOCUMENT, null, null);
         parser.nextTag();
         parser.require(XmlPullParser.START_TAG, null, MANIFEST_TAG);
@@ -370,7 +370,7 @@ public class PackageManagerService extends Service {
                     throw new XmlPullParserException("Only one application is allowed per manifest");
                 }
                 services = parseApplication(parser, pi);
-                pi.services = (ServiceInfo[]) services.toArray(new ServiceInfo[services.size()]);
+                pi.services = services.toArray(new ServiceInfo[services.size()]);
                 applicationTagDone = true;
             } else {
                 String tag = parser.getName();
@@ -442,10 +442,10 @@ public class PackageManagerService extends Service {
         }
 
         if (!libraries.isEmpty()) {
-            ai.libraries = (String[]) libraries.toArray(new String[libraries.size()]);
+            ai.libraries = libraries.toArray(new String[libraries.size()]);
         }
         if (!permissions.isEmpty()) {
-            pi.permissions = (String[]) permissions.toArray(new String[permissions.size()]);
+            pi.permissions = permissions.toArray(new String[permissions.size()]);
         }
 
         parser.require(XmlPullParser.END_TAG, null, APPLICATION_TAG);
