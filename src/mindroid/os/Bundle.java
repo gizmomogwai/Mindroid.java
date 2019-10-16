@@ -1036,4 +1036,9 @@ public final class Bundle {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return mMap.toString();
+    }
 }
