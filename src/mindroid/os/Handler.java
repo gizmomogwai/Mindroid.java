@@ -18,6 +18,8 @@
 package mindroid.os;
 
 import mindroid.util.Log;
+
+import java.time.Duration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 
@@ -27,12 +29,12 @@ import java.util.concurrent.RejectedExecutionException;
  * thread's message queue. When you create a new Handler, it is bound to the thread / message queue
  * of the thread that is creating it -- from that point on, it will deliver messages and runnables
  * to that message queue and execute them as they come out of the message queue.
- * 
+ *
  * <p>
  * There are two main uses for a Handler: (1) to schedule messages and runnables to be executed as
  * some point in the future; and (2) to enqueue an action to be performed on a different thread than
  * your own.
- * 
+ *
  * <p>
  * Scheduling messages is accomplished with the {@link #post}, {@link #postAtTime(Runnable, long)},
  * {@link #postDelayed}, {@link #sendEmptyMessage}, {@link #sendMessage}, {@link #sendMessageAtTime}
@@ -41,13 +43,13 @@ import java.util.concurrent.RejectedExecutionException;
  * <em>sendMessage</em> versions allow you to enqueue a {@link Message} object containing a bundle
  * of data that will be processed by the Handler's {@link #handleMessage} method (requiring that you
  * implement a subclass of Handler).
- * 
+ *
  * <p>
  * When posting or sending to a Handler, you can either allow the item to be processed as soon as
  * the message queue is ready to do so, or specify a delay before it gets processed or absolute time
  * for it to be processed. The latter two allow you to implement timeouts, ticks, and other
  * timing-based behavior.
- * 
+ *
  * <p>
  * When a process is created for your application, its main thread is dedicated to running a message
  * queue that takes care of managing the top-level application objects (activities, broadcast
@@ -101,7 +103,7 @@ public class Handler {
 
     /**
      * Default constructor associates this handler with the queue for the current thread.
-     * 
+     * <p>
      * If there isn't one, this handler won't be able to receive messages.
      */
     public Handler() {
@@ -145,7 +147,7 @@ public class Handler {
      * Returns a string representing the name of the specified message. The default implementation
      * will either return the class name of the message callback if any, or the hexadecimal
      * representation of the message "what" field.
-     * 
+     *
      * @param message The message whose name is being queried
      */
     public String getMessageName(Message message) {
@@ -168,7 +170,7 @@ public class Handler {
     /**
      * Same as {@link #obtainMessage()}, except that it also sets the what member of the returned
      * Message.
-     * 
+     *
      * @param what Value to assign to the returned Message.what field.
      * @return A Message from the global message pool.
      */
@@ -177,12 +179,11 @@ public class Handler {
     }
 
     /**
-     * 
      * Same as {@link #obtainMessage()}, except that it also sets the what and obj members of the
      * returned Message.
-     * 
+     *
      * @param what Value to assign to the returned Message.what field.
-     * @param obj Value to assign to the returned Message.obj field.
+     * @param obj  Value to assign to the returned Message.obj field.
      * @return A Message from the global message pool.
      */
     public final Message obtainMessage(int what, Object obj) {
@@ -190,10 +191,9 @@ public class Handler {
     }
 
     /**
-     * 
      * Same as {@link #obtainMessage()}, except that it also sets the what, arg1 and arg2 members of
      * the returned Message.
-     * 
+     *
      * @param what Value to assign to the returned Message.what field.
      * @param arg1 Value to assign to the returned Message.arg1 field.
      * @param arg2 Value to assign to the returned Message.arg2 field.
@@ -204,14 +204,13 @@ public class Handler {
     }
 
     /**
-     * 
      * Same as {@link #obtainMessage()}, except that it also sets the what, obj, arg1,and arg2
      * values on the returned Message.
-     * 
+     *
      * @param what Value to assign to the returned Message.what field.
      * @param arg1 Value to assign to the returned Message.arg1 field.
      * @param arg2 Value to assign to the returned Message.arg2 field.
-     * @param obj Value to assign to the returned Message.obj field.
+     * @param obj  Value to assign to the returned Message.obj field.
      * @return A Message from the global message pool.
      */
     public final Message obtainMessage(int what, int arg1, int arg2, Object obj) {
@@ -221,9 +220,8 @@ public class Handler {
     /**
      * Causes the Runnable runnable to be added to the message queue. The runnable will be run on the
      * thread to which this handler is attached.
-     * 
+     *
      * @param runnable The Runnable that will be executed.
-     * 
      * @return Returns the Runnable if the Runnable was successfully placed in to the message queue.
      * Returns null on failure, usually because the looper processing the message queue is exiting.
      */
@@ -235,11 +233,10 @@ public class Handler {
      * Causes the Runnable runnable to be added to the message queue, to be run at a specific time given by
      * <var>uptimeMillis</var>. <b>The time-base is {@link mindroid.os.SystemClock#uptimeMillis}
      * .</b> The runnable will be run on the thread to which this handler is attached.
-     * 
-     * @param runnable The Runnable that will be executed.
+     *
+     * @param runnable     The Runnable that will be executed.
      * @param uptimeMillis The absolute time at which the callback should run, using the
-     * {@link mindroid.os.SystemClock#uptimeMillis} time-base.
-     * 
+     *                     {@link mindroid.os.SystemClock#uptimeMillis} time-base.
      * @return Returns the Runnable if the Runnable was successfully placed in to the message queue.
      * Returns null on failure, usually because the looper processing the message queue is exiting.
      * Note that a result of true does not mean the Runnable will be processed -- if the looper is quit
@@ -253,16 +250,14 @@ public class Handler {
      * Causes the Runnable runnable to be added to the message queue, to be run at a specific time given by
      * <var>uptimeMillis</var>. <b>The time-base is {@link mindroid.os.SystemClock#uptimeMillis}
      * .</b> The runnable will be run on the thread to which this handler is attached.
-     * 
-     * @param runnable The Runnable that will be executed.
+     *
+     * @param runnable     The Runnable that will be executed.
      * @param uptimeMillis The absolute time at which the callback should run, using the
-     * {@link mindroid.os.SystemClock#uptimeMillis} time-base.
-     * 
+     *                     {@link mindroid.os.SystemClock#uptimeMillis} time-base.
      * @return Returns The Runnable if the Runnable was successfully placed in to the message queue.
      * Returns null on failure, usually because the looper processing the message queue is exiting.
      * Note that a result of true does not mean the Runnable will be processed -- if the looper is quit
      * before the delivery time of the message occurs then the message will be dropped.
-     * 
      * @see mindroid.os.SystemClock#uptimeMillis
      */
     public final Runnable postAtTime(Runnable runnable, Object token, long uptimeMillis) {
@@ -272,10 +267,9 @@ public class Handler {
     /**
      * Causes the Runnable runnable to be added to the message queue, to be run after the specified amount
      * of time elapses. The runnable will be run on the thread to which this handler is attached.
-     * 
-     * @param runnable The Runnable that will be executed.
+     *
+     * @param runnable    The Runnable that will be executed.
      * @param delayMillis The delay (in milliseconds) until the Runnable will be executed.
-     * 
      * @return Returns the Runnable if the Runnable was successfully placed in to the message queue.
      * Returns null on failure, usually because the looper processing the message queue is exiting.
      * Note that a result of true does not mean the Runnable will be processed -- if the looper is quit
@@ -304,7 +298,7 @@ public class Handler {
      * Pushes a message onto the end of the message queue after all pending messages before the
      * current time. It will be received in {@link #handleMessage}, in the thread attached to this
      * handler.
-     * 
+     *
      * @return Returns true if the message was successfully placed in to the message queue. Returns
      * false on failure, usually because the looper processing the message queue is exiting.
      */
@@ -314,7 +308,7 @@ public class Handler {
 
     /**
      * Sends a Message containing only the what value.
-     * 
+     *
      * @return Returns true if the message was successfully placed in to the message queue. Returns
      * false on failure, usually because the looper processing the message queue is exiting.
      */
@@ -325,11 +319,10 @@ public class Handler {
     /**
      * Sends a Message containing only the what value, to be delivered after the specified amount of
      * time elapses.
-     * 
-     * @see #sendMessageDelayed(mindroid.os.Message, long)
-     * 
+     *
      * @return Returns true if the message was successfully placed in to the message queue. Returns
      * false on failure, usually because the looper processing the message queue is exiting.
+     * @see #sendMessageDelayed(mindroid.os.Message, long)
      */
     public final boolean sendEmptyMessageDelayed(int what, long delayMillis) {
         Message message = Message.obtain();
@@ -339,11 +332,10 @@ public class Handler {
 
     /**
      * Sends a Message containing only the what value, to be delivered at a specific time.
-     * 
-     * @see #sendMessageAtTime(mindroid.os.Message, long)
-     * 
+     *
      * @return Returns true if the message was successfully placed in to the message queue. Returns
      * false on failure, usually because the looper processing the message queue is exiting.
+     * @see #sendMessageAtTime(mindroid.os.Message, long)
      */
     public final boolean sendEmptyMessageAtTime(int what, long uptimeMillis) {
         Message message = Message.obtain();
@@ -355,7 +347,7 @@ public class Handler {
      * Enqueue a message into the message queue after all pending messages before (current time +
      * delayMillis). You will receive it in {@link #handleMessage}, in the thread attached to this
      * handler.
-     * 
+     *
      * @return Returns true if the message was successfully placed in to the message queue. Returns
      * false on failure, usually because the looper processing the message queue is exiting. Note
      * that a result of true does not mean the message will be processed -- if the looper is quit
@@ -368,15 +360,18 @@ public class Handler {
         return sendMessageAtTime(message, SystemClock.uptimeMillis() + delayMillis);
     }
 
+    public final boolean sendMessageDelayed(Message message, Duration delay) {
+        return sendMessageDelayed(message, delay.toMillis());
+    }
+
     /**
      * Enqueue a message into the message queue after all pending messages before the absolute time
      * (in milliseconds) <var>uptimeMillis</var>. <b>The time-base is
      * {@link mindroid.os.SystemClock#uptimeMillis}.</b> You will receive it in
      * {@link #handleMessage}, in the thread attached to this handler.
-     * 
+     *
      * @param uptimeMillis The absolute time at which the message should be delivered, using the
-     * {@link mindroid.os.SystemClock#uptimeMillis} time-base.
-     * 
+     *                     {@link mindroid.os.SystemClock#uptimeMillis} time-base.
      * @return Returns true if the message was successfully placed in to the message queue. Returns
      * false on failure, usually because the looper processing the message queue is exiting. Note
      * that a result of true does not mean the message will be processed -- if the looper is quit
@@ -435,7 +430,7 @@ public class Handler {
 
     /**
      * Check if there are any pending posts of messages with callback r in the message queue.
-     * 
+     *
      * @hide
      */
     public final boolean hasCallbacks(Runnable runnable) {
